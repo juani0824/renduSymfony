@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Articles {% endblock %}
+
+{% block body %}
+<!--jumbotron-->
+<div class="jumbotron jumbotron-fluid mb-3">
+    <div class="container">
+        <h1 class="display-4">Listes des Articles</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    </div>
+</div>
+
+<!-- listes des articles-->
+<div class="album p-0">
+    <div class="container">
+        <div class="ajouter text-center">
+            <a href="{{ path('article_new') }}" class="btn btn-outline-info"><i class="fas fa-plus mr-2"></i>Ajouter un
+                article</a>
+        </div>
+        <div class="row">
+            {% for article in articles %}
+            <div class=" col-12 col-md-4 mt-4 text-center">
+                <div class="card text-center mb-4 shadow-sm">
+                    <!--Card Header-->
+                    <img src="{{ asset ( 'images/')}}{{ article.featuredImage }}" class="card-img-top"
+                        style="width:100%; height:250px; object-fit:cover;">
+
+                    <!--Card Body-->
+                    <div class="card-body">
+                        <h4 class="card-title">{{ article.titre }}</h4>
+                        <p class="card-text">{{ article.accroche }}</p>
+                        <p class="card-text"> {{ article.contenu }} </p>
+                    </div>
+                    <!-- Card Footer-->
+                    <div class="d-flex align-items-center justify-content-center ml-2 mb-2">
+                        <a href="{{ path('article_show', {'id': article.id}) }}"
+                            class="btn btn-outline-info mr-1">Voir</a>
+                        <a href="{{ path('article_edit', {'id': article.id}) }}"
+                            class="btn btn-outline-info">Modifier</a>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
